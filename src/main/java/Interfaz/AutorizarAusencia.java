@@ -280,6 +280,7 @@ public class AutorizarAusencia extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AutorizarAusencia().setVisible(true);
+                System.out.print("ddd");
             }
         });
     }
