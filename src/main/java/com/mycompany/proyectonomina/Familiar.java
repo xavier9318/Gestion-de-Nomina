@@ -7,14 +7,16 @@ public class Familiar {
     private int idEmpleado;
     private String nombre;
     private String apellido;
+    private String telefono;
     private int idParentezco;
 
     public Familiar() {}
 
-    public Familiar(int idEmpleado, String nombre, String apellido, int idParentezco) {
+    public Familiar(int idEmpleado, String nombre, String apellido, String telefono, int idParentezco) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.telefono = telefono;
         this.idParentezco = idParentezco;
     }
 
@@ -57,6 +59,15 @@ public class Familiar {
     public void setIdParentezco(int idParentezco) {
         this.idParentezco = idParentezco;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
     
 }
 

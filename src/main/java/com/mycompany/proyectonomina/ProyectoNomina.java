@@ -1,7 +1,7 @@
 
 package com.mycompany.proyectonomina;
 
-import Interfaz.EmpleadoIngreso;
+import Interfaz.Dashboard;
 import com.mycompany.proyectonomina.sql.CConexion;
 import javax.swing.SwingUtilities;
 
@@ -12,9 +12,9 @@ public class ProyectoNomina {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                EmpleadoIngreso empleadoIngreso = new EmpleadoIngreso();
-                empleadoIngreso.setDefaultCloseOperation(EmpleadoIngreso.EXIT_ON_CLOSE);
-                empleadoIngreso.setVisible(true); // Hacer visible la ventana
+                Dashboard dashboard = new Dashboard();
+                dashboard.setDefaultCloseOperation(Dashboard.EXIT_ON_CLOSE);
+                dashboard.setVisible(true); // Hacer visible la ventana
             }
         });
         CConexion objetoconexion = new CConexion();
