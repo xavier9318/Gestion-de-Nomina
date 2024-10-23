@@ -4,6 +4,12 @@
  */
 package Interfaz;
 
+import com.mycompany.proyectonomina.sql.CConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author JAVIERCITO
@@ -122,8 +128,18 @@ public class AutorizarAusencia extends javax.swing.JFrame {
         rbtnSinDescuento.setText("Sin Descuento");
 
         btnAutorizar.setText("Autorizar");
+        btnAutorizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutorizarActionPerformed(evt);
+            }
+        });
 
         btnDenegar.setText("Denegar");
+        btnDenegar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDenegarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -248,6 +264,105 @@ public class AutorizarAusencia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
+         String codigoEmpleado = txtCodigoEmpleado.getText().trim();
+    String fechaInicio = txtFechaInicio.getText().trim();
+    String fechaFinal = txtFechaFinal.getText().trim();
+    String motivo = txtMotivo.getText().trim();
+    
+    // Validar que los campos no estén vacíos
+    if (codigoEmpleado.isEmpty() || fechaInicio.isEmpty() || fechaFinal.isEmpty() || motivo.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+        return;
+    }
+
+    // Verificar qué tipo de descuento se aplicará
+    boolean descontarSalario = rbtnDescSalario.isSelected();
+    boolean descontarVacaciones = rbtnDescVaca.isSelected();
+    boolean sinDescuento = rbtnSinDescuento.isSelected();
+
+    // Lógica de descuento
+    float valorDescuento = 0.0f;
+    if (descontarSalario) {
+        // Asignar un valor de descuento si se elige descontar del salario
+        valorDescuento = calcularDescuentoSalario(); // Implementa esta función según tu lógica de negocio
+    } else if (descontarVacaciones) {
+        descontarDiasVacaciones(codigoEmpleado, fechaInicio, fechaFinal); // Implementa esta función para descontar días
+    }
+
+    // Conectar a la base de datos y actualizar el estado de la ausencia
+    CConexion conexion = new CConexion();
+    Connection conn = conexion.establecerConexion();
+
+    if (conn != null) {
+        String sql = "UPDATE Permisos SET id_estado = ?, descontar = ?, valor_descuento = ? WHERE id_empleado = ? AND fecha_permiso = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, obtenerEstadoAutorizado()); // Actualizar el estado a 'Autorizado'
+            pstmt.setBoolean(2, descontarSalario || descontarVacaciones); // Descontar o no
+            pstmt.setFloat(3, valorDescuento); // Valor del descuento (si aplica)
+            pstmt.setInt(4, Integer.parseInt(codigoEmpleado)); // Código del empleado
+            pstmt.setDate(5, java.sql.Date.valueOf(fechaInicio)); // Fecha del permiso (inicio)
+
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(this, "Ausencia autorizada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al autorizar la ausencia.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar la base de datos: " + e.getMessage());
+        } finally {
+            try {
+                conn.close(); // Cerrar la conexión
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    }//GEN-LAST:event_btnAutorizarActionPerformed
+
+    private void btnDenegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenegarActionPerformed
+        // Obtener los valores del formulario
+    String codigoEmpleado = txtCodigoEmpleado.getText().trim();
+    String fechaInicio = txtFechaInicio.getText().trim();
+
+    // Validar que los campos no estén vacíos
+    if (codigoEmpleado.isEmpty() || fechaInicio.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+        return;
+    }
+
+    // Conectar a la base de datos y actualizar el estado de la ausencia a denegado
+    CConexion conexion = new CConexion();
+    Connection conn = conexion.establecerConexion();
+
+    if (conn != null) {
+        String sql = "UPDATE Permisos SET id_estado = ? WHERE id_empleado = ? AND fecha_permiso = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, obtenerEstadoDenegado()); // Estado denegado
+            pstmt.setInt(2, Integer.parseInt(codigoEmpleado)); // Código del empleado
+            pstmt.setDate(3, java.sql.Date.valueOf(fechaInicio)); // Fecha del permiso (inicio)
+
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(this, "Ausencia denegada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al denegar la ausencia.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar la base de datos: " + e.getMessage());
+        } finally {
+            try {
+                conn.close(); // Cerrar la conexión
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    }//GEN-LAST:event_btnDenegarActionPerformed
 
     /**
      * @param args the command line arguments

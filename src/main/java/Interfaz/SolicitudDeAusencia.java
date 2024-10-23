@@ -4,18 +4,25 @@
  */
 package Interfaz;
 
+import com.mycompany.proyectonomina.Permiso;
+import com.mycompany.proyectonomina.sql.CConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author JAVIERCITO
  */
-public class SolicitudDeAusencia extends javax.swing.JFrame {
+    public class SolicitudDeAusencia extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SolicitudDeAusencia
-     */
-    public SolicitudDeAusencia() {
-        initComponents();
-    }
+        /**
+         * Creates new form SolicitudDeAusencia
+         */
+        public SolicitudDeAusencia() {
+            initComponents();
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,9 +44,9 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
         txtFechaFinal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtMotivo = new javax.swing.JTextArea();
+        btnEnviar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,13 +63,23 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
 
         jLabel5.setText("Motivo:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtMotivo.setColumns(20);
+        txtMotivo.setRows(5);
+        jScrollPane2.setViewportView(txtMotivo);
 
-        jButton1.setText("Enviar");
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Cancelar");
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("SOLICITUD DE AUSENCIA");
 
@@ -72,9 +89,9 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 212, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -127,8 +144,8 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnRegresar)
+                    .addComponent(btnEnviar))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -139,6 +156,80 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        Dashboard ventanaprincipal = new Dashboard();
+        ventanaprincipal.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+          // Obtener datos de los campos de texto
+    String codigoEmpleado = txtCodigoEmpleado.getText().trim();
+    String fechaInicio = txtFechaInicio.getText().trim();
+    String fechaFinal = txtFechaFinal.getText().trim(); // Esto no se usa en la consulta, podrías manejarlo después
+    String motivo = txtMotivo.getText().trim();
+
+    // Validar que los campos no estén vacíos
+    if (codigoEmpleado.isEmpty() || fechaInicio.isEmpty() || motivo.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+        return;
+    }
+
+    // Crear un objeto Permiso
+    Permiso permiso = new Permiso();
+    permiso.setFechaSolicitud(java.time.LocalDate.now().toString()); // Usar la fecha actual como fecha de solicitud
+    permiso.setFechaPermiso(fechaInicio);  // Fecha del permiso (inicio)
+    permiso.setIdEmpleado(Integer.parseInt(codigoEmpleado)); // ID del empleado
+    permiso.setIdUsuario(obtenerIdUsuarioActual()); // Obtener el ID del usuario que está logueado
+    permiso.setMotivo(motivo); // Motivo del permiso
+    permiso.setIdPlanilla(obtenerIdPlanillaActual()); // Obtener ID de la planilla actual
+    permiso.setIdEstado(obtenerEstadoInicial()); // Estado inicial del permiso (pendiente, aprobado, etc.)
+    permiso.setDescontar(false); // Descontar del salario (falso por defecto)
+    permiso.setValorDescuento(0.0f); // Valor descuento (si aplica)
+    permiso.setIdCategoria(obtenerIdCategoriaPermiso()); // ID de la categoría del permiso (tipo de permiso)
+
+    // Conectar a la base de datos
+    CConexion conexion = new CConexion();
+    Connection conn = conexion.establecerConexion();
+
+    if (conn != null) {
+        String sql = "INSERT INTO Permisos (fecha_solicitud, fecha_permiso, id_empleado, id_usuario, motivo, id_planilla, id_estado, descontar, valor_descuento, id_categoria) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Rellenar los valores del PreparedStatement usando los datos del objeto Permiso
+            pstmt.setDate(1, java.sql.Date.valueOf(permiso.getFechaSolicitud())); // Fecha de solicitud (actual)
+            pstmt.setDate(2, java.sql.Date.valueOf(permiso.getFechaPermiso())); // Fecha del permiso (inicio)
+            pstmt.setInt(3, permiso.getIdEmpleado()); // ID del empleado
+            pstmt.setInt(4, permiso.getIdUsuario()); // ID del usuario que está logueado
+            pstmt.setString(5, permiso.getMotivo()); // Motivo del permiso
+            pstmt.setInt(6, permiso.getIdPlanilla()); // ID de la planilla
+            pstmt.setInt(7, permiso.getIdEstado()); // Estado inicial del permiso
+            pstmt.setBoolean(8, permiso.isDescontar()); // Descontar del salario (por defecto false)
+            pstmt.setFloat(9, permiso.getValorDescuento()); // Valor descuento (por defecto 0.0f)
+            pstmt.setInt(10, permiso.getIdCategoria()); // ID de la categoría del permiso (tipo)
+
+            // Ejecutar la actualización
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(this, "Permiso enviado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al enviar el permiso.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        } finally {
+            try {
+                conn.close(); // Cerrar la conexión
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,8 +267,8 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -186,10 +277,10 @@ public class SolicitudDeAusencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextField txtFechaFinal;
     private javax.swing.JTextField txtFechaInicio;
+    private javax.swing.JTextArea txtMotivo;
     private javax.swing.JTextPane txtNombreEmpleado;
     // End of variables declaration//GEN-END:variables
 }

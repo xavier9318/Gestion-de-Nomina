@@ -26,11 +26,16 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuGestionEmpleado = new javax.swing.JMenu();
         mntIngresarEmpleado = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mnuGestionNomina = new javax.swing.JMenu();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +60,14 @@ public class Dashboard extends javax.swing.JFrame {
         });
         mnuGestionEmpleado.add(mntIngresarEmpleado);
 
+        jMenuItem1.setText("Solicitar Ausencia");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuGestionEmpleado.add(jMenuItem1);
+
         jMenuBar1.add(mnuGestionEmpleado);
 
         mnuGestionNomina.setText("Gestion Nomina");
@@ -78,10 +91,16 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void mntIngresarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntIngresarEmpleadoActionPerformed
         EmpleadoIngreso ventanaingresoempleado = new EmpleadoIngreso();
-    ventanaingresoempleado.setVisible(true); 
-    this.dispose(); 
+        ventanaingresoempleado.setVisible(true); 
+        this.dispose(); 
         
     }//GEN-LAST:event_mntIngresarEmpleadoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        SolicitudDeAusencia ventanasolicitudausencia = new SolicitudDeAusencia();
+        ventanasolicitudausencia.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,7 +138,9 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mntIngresarEmpleado;
     private javax.swing.JMenu mnuGestionEmpleado;

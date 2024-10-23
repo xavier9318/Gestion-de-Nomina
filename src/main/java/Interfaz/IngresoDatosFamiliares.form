@@ -61,9 +61,9 @@
                       <Component id="cbxParentezco" min="-2" pref="145" max="-2" attributes="0"/>
                       <Component id="txtTelefono" min="-2" pref="145" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnGuardar" min="-2" pref="57" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="btnRegresar" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" min="-2" pref="75" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnRegresar" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtApellidos" min="-2" pref="387" max="-2" attributes="0"/>
                       <Component id="txtNombres" min="-2" pref="335" max="-2" attributes="0"/>
@@ -176,6 +176,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
