@@ -12,10 +12,12 @@ public class Permiso {
     private int idEstado;
     private boolean descontar;
     private float valorDescuento;
+    private int idCategoria;
+
 
     public Permiso() {}
 
-    public Permiso(String fechaSolicitud, String fechaPermiso, int idEmpleado, int idUsuario, String motivo, int idPlanilla, int idEstado, boolean descontar, float valorDescuento) {
+    public Permiso(String fechaSolicitud, String fechaPermiso, int idEmpleado, int idUsuario, String motivo, int idPlanilla, int idEstado, boolean descontar, float valorDescuento, int idCategoria) {
         this.fechaSolicitud = fechaSolicitud;
         this.fechaPermiso = fechaPermiso;
         this.idEmpleado = idEmpleado;
@@ -25,10 +27,19 @@ public class Permiso {
         this.idEstado = idEstado;
         this.descontar = descontar;
         this.valorDescuento = valorDescuento;
+        this.idCategoria = idCategoria;
     }
 
     public int getIdPermiso() {
         return idPermiso;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public void setIdPermiso(int idPermiso) {

@@ -32,6 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
         mnuGestionEmpleado = new javax.swing.JMenu();
         mntIngresarEmpleado = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnuGestionNomina = new javax.swing.JMenu();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -68,6 +69,14 @@ public class Dashboard extends javax.swing.JFrame {
         });
         mnuGestionEmpleado.add(jMenuItem1);
 
+        jMenuItem2.setText("Autorizar Ausencia");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnuGestionEmpleado.add(jMenuItem2);
+
         jMenuBar1.add(mnuGestionEmpleado);
 
         mnuGestionNomina.setText("Gestion Nomina");
@@ -101,6 +110,12 @@ public class Dashboard extends javax.swing.JFrame {
         ventanasolicitudausencia.setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        AutorizarAusencia ventanaautoausencia = new AutorizarAusencia();
+        ventanaautoausencia.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +156,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mntIngresarEmpleado;
     private javax.swing.JMenu mnuGestionEmpleado;

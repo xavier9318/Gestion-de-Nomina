@@ -2,27 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaz;
+    package Interfaz;
 
-import com.mycompany.proyectonomina.Permiso;
-import com.mycompany.proyectonomina.sql.CConexion;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+    import java.sql.Connection;
+    import java.sql.PreparedStatement;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+    import javax.swing.JOptionPane;
+    import com.mycompany.proyectonomina.sql.CConexion;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-/**
- *
- * @author JAVIERCITO
- */
-    public class SolicitudDeAusencia extends javax.swing.JFrame {
+  
+        public class SolicitudDeAusencia extends javax.swing.JFrame {
 
-        /**
-         * Creates new form SolicitudDeAusencia
-         */
-        public SolicitudDeAusencia() {
-            initComponents();
-        }
+            private CConexion conexion; // Instancia de CConexion
+            
+            public SolicitudDeAusencia() {
+                initComponents();
+                conexion = new CConexion();
+                
+             
+               
+
+            }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,8 +41,6 @@ import javax.swing.JOptionPane;
         jLabel1 = new javax.swing.JLabel();
         txtCodigoEmpleado = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtNombreEmpleado = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         txtFechaInicio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -48,18 +51,35 @@ import javax.swing.JOptionPane;
         btnEnviar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        txtNombreEmpleado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Código de Empleado:");
 
-        jLabel2.setText("Nombre Empleado: ");
+        txtCodigoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoEmpleadoActionPerformed(evt);
+            }
+        });
 
-        jScrollPane1.setViewportView(txtNombreEmpleado);
+        jLabel2.setText("Nombre Empleado: ");
 
         jLabel3.setText("Fecha de Final :");
 
+        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaInicioActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Fecha de Inicio :");
+
+        txtFechaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaFinalActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Motivo:");
 
@@ -83,36 +103,42 @@ import javax.swing.JOptionPane;
 
         jLabel6.setText("SOLICITUD DE AUSENCIA");
 
+        txtNombreEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreEmpleadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 212, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1)
                             .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(27, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(40, 40, 40)
@@ -131,8 +157,8 @@ import javax.swing.JOptionPane;
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -146,7 +172,7 @@ import javax.swing.JOptionPane;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
                     .addComponent(btnEnviar))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(141, 141, 141)
@@ -164,72 +190,109 @@ import javax.swing.JOptionPane;
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-          // Obtener datos de los campos de texto
-    String codigoEmpleado = txtCodigoEmpleado.getText().trim();
-    String fechaInicio = txtFechaInicio.getText().trim();
-    String fechaFinal = txtFechaFinal.getText().trim(); // Esto no se usa en la consulta, podrías manejarlo después
-    String motivo = txtMotivo.getText().trim();
+         int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText());
+    String fechaInicio = txtFechaInicio.getText();  // Fecha de inicio en formato DD-MM-YYYY
+    String fechaFinal = txtFechaFinal.getText();     // Fecha final en formato DD-MM-YYYY
+    String motivo = txtMotivo.getText();
+    int idEstado = 1; // ID para estado "Pendiente"
 
-    // Validar que los campos no estén vacíos
-    if (codigoEmpleado.isEmpty() || fechaInicio.isEmpty() || motivo.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
-        return;
-    }
+    try (Connection conn = new CConexion().establecerConexion(); 
+         PreparedStatement stmt = conn.prepareStatement("INSERT INTO Permisos (fecha_solicitud, fecha_inicio, fecha_final, id_empleado, motivo, id_estado) VALUES (?, ?, ?, ?, ?, ?)")) {
 
-    // Crear un objeto Permiso
-    Permiso permiso = new Permiso();
-    permiso.setFechaSolicitud(java.time.LocalDate.now().toString()); // Usar la fecha actual como fecha de solicitud
-    permiso.setFechaPermiso(fechaInicio);  // Fecha del permiso (inicio)
-    permiso.setIdEmpleado(Integer.parseInt(codigoEmpleado)); // ID del empleado
-    permiso.setIdUsuario(obtenerIdUsuarioActual()); // Obtener el ID del usuario que está logueado
-    permiso.setMotivo(motivo); // Motivo del permiso
-    permiso.setIdPlanilla(obtenerIdPlanillaActual()); // Obtener ID de la planilla actual
-    permiso.setIdEstado(obtenerEstadoInicial()); // Estado inicial del permiso (pendiente, aprobado, etc.)
-    permiso.setDescontar(false); // Descontar del salario (falso por defecto)
-    permiso.setValorDescuento(0.0f); // Valor descuento (si aplica)
-    permiso.setIdCategoria(obtenerIdCategoriaPermiso()); // ID de la categoría del permiso (tipo de permiso)
+        // Fecha de solicitud actual
+        java.sql.Date fechaSolicitud = java.sql.Date.valueOf(LocalDate.now());
+        stmt.setDate(1, fechaSolicitud); 
 
-    // Conectar a la base de datos
-    CConexion conexion = new CConexion();
-    Connection conn = conexion.establecerConexion();
-
-    if (conn != null) {
-        String sql = "INSERT INTO Permisos (fecha_solicitud, fecha_permiso, id_empleado, id_usuario, motivo, id_planilla, id_estado, descontar, valor_descuento, id_categoria) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            // Rellenar los valores del PreparedStatement usando los datos del objeto Permiso
-            pstmt.setDate(1, java.sql.Date.valueOf(permiso.getFechaSolicitud())); // Fecha de solicitud (actual)
-            pstmt.setDate(2, java.sql.Date.valueOf(permiso.getFechaPermiso())); // Fecha del permiso (inicio)
-            pstmt.setInt(3, permiso.getIdEmpleado()); // ID del empleado
-            pstmt.setInt(4, permiso.getIdUsuario()); // ID del usuario que está logueado
-            pstmt.setString(5, permiso.getMotivo()); // Motivo del permiso
-            pstmt.setInt(6, permiso.getIdPlanilla()); // ID de la planilla
-            pstmt.setInt(7, permiso.getIdEstado()); // Estado inicial del permiso
-            pstmt.setBoolean(8, permiso.isDescontar()); // Descontar del salario (por defecto false)
-            pstmt.setFloat(9, permiso.getValorDescuento()); // Valor descuento (por defecto 0.0f)
-            pstmt.setInt(10, permiso.getIdCategoria()); // ID de la categoría del permiso (tipo)
-
-            // Ejecutar la actualización
-            int filasAfectadas = pstmt.executeUpdate();
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(this, "Permiso enviado exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al enviar el permiso.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-        } finally {
-            try {
-                conn.close(); // Cerrar la conexión
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        // Convertir fechaInicio de DD-MM-YYYY a YYYY-MM-DD
+        LocalDate fechaInicioLocal;
+        try {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            fechaInicioLocal = LocalDate.parse(fechaInicio, inputFormatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha de inicio incorrecto. Por favor, usa DD-MM-YYYY.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        stmt.setDate(2, java.sql.Date.valueOf(fechaInicioLocal)); 
+
+        // Convertir fechaFinal de DD-MM-YYYY a YYYY-MM-DD
+        LocalDate fechaFinalLocal;
+        try {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            fechaFinalLocal = LocalDate.parse(fechaFinal, inputFormatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha final incorrecto. Por favor, usa DD-MM-YYYY.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        stmt.setDate(3, java.sql.Date.valueOf(fechaFinalLocal)); 
+
+        stmt.setInt(4, idEmpleado); 
+        stmt.setString(5, motivo); 
+        stmt.setInt(6, idEstado); 
+
+        stmt.executeUpdate();
+        JOptionPane.showMessageDialog(this, "Permiso enviado exitosamente.");
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al enviar el permiso: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void txtCodigoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoEmpleadoActionPerformed
+        try {
+        int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText());
+        String nombreCompleto = obtenerNombreEmpleado(idEmpleado);
+        if (nombreCompleto != null) {
+            txtNombreEmpleado.setText(nombreCompleto);
+        } else {
+            txtNombreEmpleado.setText("");
+            JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        txtNombreEmpleado.setText("");
+    }
+    }//GEN-LAST:event_txtCodigoEmpleadoActionPerformed
+
+    private void txtNombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreEmpleadoActionPerformed
+        
+    }//GEN-LAST:event_txtNombreEmpleadoActionPerformed
+
+    private void txtFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaInicioActionPerformed
+
+    private void txtFechaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaFinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaFinalActionPerformed
+    private String obtenerNombreEmpleado(int idEmpleado) {
+        String nombre = null;
+        Connection conn = null;
+
+        try {
+            conn = conexion.establecerConexion(); // Usando la instancia
+            PreparedStatement stmt = conn.prepareStatement("SELECT nombre, apellido FROM Empleado WHERE id_empleado = ?");
+            stmt.setInt(1, idEmpleado);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nombre = rs.getString("nombre").trim() + " " + rs.getString("apellido").trim();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener datos del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Asegúrate de cerrar la conexión en el bloque finally
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error al cerrar la conexión.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        return nombre;
+    }
+
 
     /**
      * @param args the command line arguments
@@ -275,12 +338,11 @@ import javax.swing.JOptionPane;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextField txtFechaFinal;
     private javax.swing.JTextField txtFechaInicio;
     private javax.swing.JTextArea txtMotivo;
-    private javax.swing.JTextPane txtNombreEmpleado;
+    private javax.swing.JTextField txtNombreEmpleado;
     // End of variables declaration//GEN-END:variables
 }

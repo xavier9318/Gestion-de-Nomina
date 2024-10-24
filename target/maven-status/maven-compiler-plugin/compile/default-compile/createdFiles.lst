@@ -3,6 +3,8 @@ Interfaz\EmpleadoIngreso$6.class
 Interfaz\NominaVentana.class
 Interfaz\IngresarPrestamo$2.class
 Interfaz\IngresoDatosFamiliares.class
+Interfaz\Dashboard$4.class
+Interfaz\AutorizarAusencia$4.class
 Interfaz\IngresoDatosFamiliares$2.class
 Interfaz\ComisionProduccion$1.class
 com\mycompany\proyectonomina\Usuario.class
@@ -17,6 +19,7 @@ com\mycompany\proyectonomina\Anticipo.class
 Interfaz\CalcularLiquidacion.class
 com\mycompany\proyectonomina\ProyectoNomina$1.class
 Interfaz\PRESTACIONES$3.class
+Interfaz\SolicitudDeAusencia$5.class
 Interfaz\EmpleadoIngreso$2.class
 Interfaz\EmpleadoIngreso$5.class
 Interfaz\IngresarComisiones.class
@@ -26,10 +29,13 @@ Interfaz\SolicitudDeAusencia$1.class
 com\mycompany\proyectonomina\Prestamo.class
 Interfaz\Dashboard$1.class
 com\mycompany\proyectonomina\Planilla.class
+Interfaz\AutorizarAusencia$3.class
 Interfaz\EmpleadoIngreso$9.class
 com\mycompany\proyectonomina\Mes.class
 com\mycompany\proyectonomina\sql\CConexion.class
+Interfaz\SolicitudDeAusencia$4.class
 Interfaz\AutorizarAusencia.class
+com\mycompany\proyectonomina\Vacacion.class
 Interfaz\ComisionVentas.class
 com\mycompany\proyectonomina\Comision.class
 Interfaz\NominaVentana$1.class
@@ -37,6 +43,7 @@ Interfaz\EmpleadoIngreso$1.class
 Interfaz\IngresarComisiones$1.class
 Interfaz\EstadoDeCuentaPrestamo$1.class
 Interfaz\IngresoDatosFamiliares$1.class
+Interfaz\SolicitudDeAusencia$7.class
 Interfaz\PRESTACIONES.class
 Interfaz\PRESTACIONES$1.class
 com\mycompany\proyectonomina\Permiso.class
@@ -48,6 +55,7 @@ Interfaz\Dashboard$2.class
 Interfaz\EmpleadoIngreso$8.class
 Interfaz\IngresoDatosFamiliares$4.class
 Interfaz\SolicitudDeAusencia.class
+Interfaz\AutorizarAusencia$5.class
 Interfaz\EmpleadoIngreso$7.class
 Interfaz\NominaVentana$2.class
 com\mycompany\proyectonomina\Familiar.class
@@ -56,6 +64,7 @@ Interfaz\Dashboard$3.class
 com\mycompany\proyectonomina\Rol.class
 Interfaz\EmpleadoIngreso.class
 Interfaz\IngresarPrestamo$1.class
+Interfaz\SolicitudDeAusencia$3.class
 com\mycompany\proyectonomina\Parentezco.class
 Interfaz\ComisionProduccion.class
 com\mycompany\proyectonomina\ProyectoNomina.class
@@ -64,3 +73,4 @@ Interfaz\AutorizarAusencia$1.class
 Interfaz\TiendaSolidaria.class
 Interfaz\PRESTACIONES$2.class
 Interfaz\EmpleadoIngreso$4.class
+Interfaz\SolicitudDeAusencia$6.class

@@ -4,23 +4,82 @@
  */
 package Interfaz;
 
-import com.mycompany.proyectonomina.sql.CConexion;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import com.mycompany.proyectonomina.sql.CConexion;
 
 /**
  *
  * @author JAVIERCITO
  */
 public class AutorizarAusencia extends javax.swing.JFrame {
+    private CConexion conexion;
+    
+    
+   private void cargarSolicitudes() {
+    DefaultTableModel modelo = (DefaultTableModel) txtSolicitudes.getModel();
+    modelo.setRowCount(0); // Limpiar el modelo actual
 
-    /**
-     * Creates new form AutorizarAusencia
-     */
+    String query = "SELECT e.id_empleado, e.nombre, e.apellido, p.motivo, "
+                 + "p.fecha_solicitud, p.fecha_inicio, p.fecha_final, es.descripcion AS estado "
+                 + "FROM Permisos p "
+                 + "JOIN Empleado e ON p.id_empleado = e.id_empleado "
+                 + "JOIN Estado es ON p.id_estado = es.id_estado "
+                 + "WHERE es.descripcion = 'pendiente' "
+                 + "ORDER BY p.fecha_solicitud ASC";
+
+    try (Connection conn = new CConexion().establecerConexion(); 
+         PreparedStatement stmt = conn.prepareStatement(query);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Object[] fila = new Object[8]; // Ajusta el tamaño del array según el número de columnas
+            fila[0] = rs.getInt("id_empleado"); // ID de empleado
+            fila[1] = rs.getString("nombre"); // Nombre
+            fila[2] = rs.getString("apellido"); // Apellido
+            fila[3] = rs.getString("motivo"); // Motivo de ausencia
+            fila[4] = rs.getDate("fecha_solicitud"); // Fecha de solicitud
+            fila[5] = rs.getDate("fecha_inicio"); // Fecha de inicio
+            fila[6] = rs.getDate("fecha_final"); // Fecha final
+            fila[7] = rs.getString("estado"); // Estado
+            modelo.addRow(fila);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar las solicitudes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+
+
     public AutorizarAusencia() {
         initComponents();
+        cargarSolicitudes();
+        conexion = new CConexion();
+        
+        txtSolicitudes.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent evt) {
+        if (evt.getClickCount() == 2) {
+            int filaSeleccionada = txtSolicitudes.getSelectedRow();
+            if (filaSeleccionada != -1) { // Asegurarse de que se ha seleccionado una fila
+                txtCodigoEmpleado.setText(txtSolicitudes.getValueAt(filaSeleccionada, 0).toString());
+                txtNombre.setText(txtSolicitudes.getValueAt(filaSeleccionada, 1).toString());
+                txtApellido.setText(txtSolicitudes.getValueAt(filaSeleccionada, 2).toString());
+                txtMotivo.setText(txtSolicitudes.getValueAt(filaSeleccionada, 3).toString());
+                txtFechaInicio.setText(txtSolicitudes.getValueAt(filaSeleccionada, 5).toString());
+                txtFechaFinal.setText(txtSolicitudes.getValueAt(filaSeleccionada, 6).toString());
+            }
+        }
+    }
+});
+
     }
 
     /**
@@ -37,7 +96,7 @@ public class AutorizarAusencia extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        txtSolicitudes = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -67,7 +126,7 @@ public class AutorizarAusencia extends javax.swing.JFrame {
 
         jLabel1.setText("Gestión de Solicitudes de Ausencia");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        txtSolicitudes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -93,7 +152,7 @@ public class AutorizarAusencia extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(txtSolicitudes);
 
         jLabel2.setText("Codigo Empleado:");
 
@@ -266,102 +325,11 @@ public class AutorizarAusencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
-         String codigoEmpleado = txtCodigoEmpleado.getText().trim();
-    String fechaInicio = txtFechaInicio.getText().trim();
-    String fechaFinal = txtFechaFinal.getText().trim();
-    String motivo = txtMotivo.getText().trim();
-    
-    // Validar que los campos no estén vacíos
-    if (codigoEmpleado.isEmpty() || fechaInicio.isEmpty() || fechaFinal.isEmpty() || motivo.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
-        return;
-    }
-
-    // Verificar qué tipo de descuento se aplicará
-    boolean descontarSalario = rbtnDescSalario.isSelected();
-    boolean descontarVacaciones = rbtnDescVaca.isSelected();
-    boolean sinDescuento = rbtnSinDescuento.isSelected();
-
-    // Lógica de descuento
-    float valorDescuento = 0.0f;
-    if (descontarSalario) {
-        // Asignar un valor de descuento si se elige descontar del salario
-        valorDescuento = calcularDescuentoSalario(); // Implementa esta función según tu lógica de negocio
-    } else if (descontarVacaciones) {
-        descontarDiasVacaciones(codigoEmpleado, fechaInicio, fechaFinal); // Implementa esta función para descontar días
-    }
-
-    // Conectar a la base de datos y actualizar el estado de la ausencia
-    CConexion conexion = new CConexion();
-    Connection conn = conexion.establecerConexion();
-
-    if (conn != null) {
-        String sql = "UPDATE Permisos SET id_estado = ?, descontar = ?, valor_descuento = ? WHERE id_empleado = ? AND fecha_permiso = ?";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, obtenerEstadoAutorizado()); // Actualizar el estado a 'Autorizado'
-            pstmt.setBoolean(2, descontarSalario || descontarVacaciones); // Descontar o no
-            pstmt.setFloat(3, valorDescuento); // Valor del descuento (si aplica)
-            pstmt.setInt(4, Integer.parseInt(codigoEmpleado)); // Código del empleado
-            pstmt.setDate(5, java.sql.Date.valueOf(fechaInicio)); // Fecha del permiso (inicio)
-
-            int filasAfectadas = pstmt.executeUpdate();
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(this, "Ausencia autorizada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al autorizar la ausencia.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar la base de datos: " + e.getMessage());
-        } finally {
-            try {
-                conn.close(); // Cerrar la conexión
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+       
     }//GEN-LAST:event_btnAutorizarActionPerformed
 
     private void btnDenegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenegarActionPerformed
-        // Obtener los valores del formulario
-    String codigoEmpleado = txtCodigoEmpleado.getText().trim();
-    String fechaInicio = txtFechaInicio.getText().trim();
-
-    // Validar que los campos no estén vacíos
-    if (codigoEmpleado.isEmpty() || fechaInicio.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
-        return;
-    }
-
-    // Conectar a la base de datos y actualizar el estado de la ausencia a denegado
-    CConexion conexion = new CConexion();
-    Connection conn = conexion.establecerConexion();
-
-    if (conn != null) {
-        String sql = "UPDATE Permisos SET id_estado = ? WHERE id_empleado = ? AND fecha_permiso = ?";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, obtenerEstadoDenegado()); // Estado denegado
-            pstmt.setInt(2, Integer.parseInt(codigoEmpleado)); // Código del empleado
-            pstmt.setDate(3, java.sql.Date.valueOf(fechaInicio)); // Fecha del permiso (inicio)
-
-            int filasAfectadas = pstmt.executeUpdate();
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(this, "Ausencia denegada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al denegar la ausencia.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar la base de datos: " + e.getMessage());
-        } finally {
-            try {
-                conn.close(); // Cerrar la conexión
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+        
     }//GEN-LAST:event_btnDenegarActionPerformed
 
     /**
@@ -421,7 +389,6 @@ public class AutorizarAusencia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable1;
     private javax.swing.JRadioButton rbtnDescSalario;
     private javax.swing.JRadioButton rbtnDescVaca;
     private javax.swing.JRadioButton rbtnSinDescuento;
@@ -431,5 +398,6 @@ public class AutorizarAusencia extends javax.swing.JFrame {
     private javax.swing.JTextPane txtFechaInicio;
     private javax.swing.JTextArea txtMotivo;
     private javax.swing.JTextPane txtNombre;
+    private javax.swing.JTable txtSolicitudes;
     // End of variables declaration//GEN-END:variables
 }
