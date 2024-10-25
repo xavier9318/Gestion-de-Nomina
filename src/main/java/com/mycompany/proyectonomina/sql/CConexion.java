@@ -13,6 +13,13 @@ public class CConexion {
     String ip = "localhost";
     String puerto = "1433";
     
+    public Connection getConnection() {
+    if (conectar == null) {
+        establecerConexion(); // Establece la conexión si aún no se ha hecho
+    }
+    return conectar;
+}
+    
     public Connection establecerConexion() {
         try {
             // Modificando la cadena de conexión

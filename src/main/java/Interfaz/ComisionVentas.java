@@ -4,31 +4,31 @@
  */
 package Interfaz;
 
+import com.mycompany.proyectonomina.EmpleadoCBD;
+import com.mycompany.proyectonomina.sql.CConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 public class ComisionVentas extends javax.swing.JFrame {
-
     private int idEmpleado;
-    private String nombreEmpleado;
-    private String puestoEmpleado;
     
-    public ComisionVentas(int idEmpleado, String nombreEmpleado, String puestoEmpleado) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = nombreEmpleado;
-        this.puestoEmpleado = puestoEmpleado;
-        initComponents(); // Inicializa los componentes de la interfaz
-        // Llenar los campos
-        txtNombre.setText(nombreEmpleado);
-        txtPuesto.setText(puestoEmpleado);
-    }
-    // Constructor que acepta un int
+
     public ComisionVentas(int idEmpleado) {
         this.idEmpleado = idEmpleado;
-        initComponents(); // Inicializa los componentes de la interfaz
+        initComponents();
+        txtCodigoEmpleado.setText(String.valueOf(idEmpleado));
+        mostrarNombreEmpleado();
     }
-    
     public ComisionVentas() {
         initComponents();
     }
+    private void mostrarNombreEmpleado() {
+        
+        String nombreCompleto = EmpleadoCBD.obtenerNombreCompleto(idEmpleado);
+        txtNombre.setText(nombreCompleto); // Muestra el nombre en el JTextField
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +54,7 @@ public class ComisionVentas extends javax.swing.JFrame {
         btnGuardarComision = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
-        txtPuesto = new javax.swing.JTextField();
+        txtCodigoEmpleado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,14 +67,29 @@ public class ComisionVentas extends javax.swing.JFrame {
         jScrollPane3.setViewportView(txtPorcentaje);
 
         btnCalcularComision.setText("Calcular Comisión");
+        btnCalcularComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularComisionActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Comisión:");
 
         jScrollPane4.setViewportView(txtComision);
 
         btnGuardarComision.setText("Guardar Comisión");
+        btnGuardarComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarComisionActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +129,7 @@ public class ComisionVentas extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -125,7 +140,6 @@ public class ComisionVentas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -150,7 +164,7 @@ public class ComisionVentas extends javax.swing.JFrame {
                             .addComponent(btnRegresar)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -171,6 +185,90 @@ public class ComisionVentas extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        IngresarComisiones ventanaingresarcomisiones = new IngresarComisiones();
+        ventanaingresarcomisiones.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnCalcularComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularComisionActionPerformed
+        try {
+        // Obtener el total de ventas del campo de texto y convertirlo a un número
+        double totalVentas = Double.parseDouble(txtTotalVenta.getText().trim());
+        double porcentaje = 0.0;
+        double comision = 0.0;
+
+        // Determinar el porcentaje según el rango de ventas
+        if (totalVentas <= 100000) {
+            porcentaje = 0.0; // 0%
+        } else if (totalVentas <= 200000) {
+            porcentaje = 2.5; // 2.5%
+        } else if (totalVentas <= 400000) {
+            porcentaje = 3.5; // 3.5%
+        } else {
+            porcentaje = 4.5; // 4.5%
+        }
+
+        // Calcular la comisión
+        comision = (porcentaje / 100) * totalVentas;
+
+        // Mostrar el porcentaje en el campo correspondiente
+        txtPorcentaje.setText(String.valueOf(porcentaje) + "%");
+
+        // Mostrar el monto de la comisión en el campo correspondiente
+        txtComision.setText(String.format("%.2f", comision)); // Formato a 2 decimales
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese un número válido en Total de Ventas.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    }//GEN-LAST:event_btnCalcularComisionActionPerformed
+
+    private void btnGuardarComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComisionActionPerformed
+        try {
+        // Obtener datos desde la interfaz
+        double montoVentas = Double.parseDouble(txtTotalVenta.getText().trim());
+        double porcentajeComision = Double.parseDouble(txtPorcentaje.getText().trim().replace("%", "")); // Eliminar el símbolo de porcentaje
+        double montoComision = Double.parseDouble(txtComision.getText().trim());
+
+        // Asignar id_planilla, si lo tienes disponible, si no, puede ser null
+        Integer idPlanilla = null; // Cambiar este valor según tu lógica
+
+        // Crear la conexión
+        CConexion conexion = new CConexion();
+        Connection connection = conexion.getConnection();
+
+        // Preparar la consulta SQL
+        String sql = "INSERT INTO Comision_Ventas (id_empleado, id_planilla, monto_ventas, porcentaje_comision, monto_comision) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        
+        // Establecer los valores
+        preparedStatement.setInt(1, idEmpleado); // El id del empleado que recibiste
+        if (idPlanilla != null) {
+            preparedStatement.setInt(2, idPlanilla);
+        } else {
+            preparedStatement.setNull(2, java.sql.Types.INTEGER); // Para manejar el caso de que sea null
+        }
+        preparedStatement.setDouble(3, montoVentas);
+        preparedStatement.setDouble(4, porcentajeComision);
+        preparedStatement.setDouble(5, montoComision);
+
+        // Ejecutar la inserción
+        int rowsAffected = preparedStatement.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(this, "Comisión guardada exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo guardar la comisión.");
+        }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar la comisión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    }//GEN-LAST:event_btnGuardarComisionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,10 +317,10 @@ public class ComisionVentas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextPane txtComision;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextPane txtPorcentaje;
-    private javax.swing.JTextField txtPuesto;
     private javax.swing.JTextField txtTotalVenta;
     // End of variables declaration//GEN-END:variables
 }

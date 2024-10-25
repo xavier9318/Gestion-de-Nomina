@@ -88,6 +88,11 @@ public class IngresarComisiones extends javax.swing.JFrame {
         });
 
         btbCancelar.setText("Cancelar");
+        btbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbCancelarActionPerformed(evt);
+            }
+        });
 
         txtPuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,32 +325,38 @@ public class IngresarComisiones extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPuestoActionPerformed
 
     private void btbIngresarComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbIngresarComisionActionPerformed
-       try {
-            int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText());
-            int idPuesto = obtenerIdPuesto(idEmpleado); // Obtener el id del puesto
+          try {
+        int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText());
+        int idPuesto = obtenerIdPuesto(idEmpleado); // Obtener el id del puesto
 
-            if (idPuesto != -1) {
-                if (esProduccion(idPuesto)) {
-                    // Redirigir a la ventana ComisionProduccion
-                    ComisionProduccion ventanaProduccion = new ComisionProduccion(idEmpleado);
-                    ventanaProduccion.setVisible(true);
-                    this.dispose(); // Cierra la ventana actual si es necesario
-                } else if (esVentas(idPuesto)) {
-                    // Redirigir a la ventana ComisionVentas
-                    ComisionVentas ventanaVentas = new ComisionVentas(idEmpleado);
-                    ventanaVentas.setVisible(true);
-                    this.dispose(); // Cierra la ventana actual si es necesario
-                } else {
-                    JOptionPane.showMessageDialog(this, "El empleado no pertenece a Producción o Ventas.", "Información", JOptionPane.INFORMATION_MESSAGE);
-                }
+        if (idPuesto != -1) {
+            if (esProduccion(idPuesto)) {
+                // Redirigir a la ventana ComisionProduccion pasando idEmpleado
+                ComisionProduccion ventanaProduccion = new ComisionProduccion(idEmpleado);
+                ventanaProduccion.setVisible(true);
+                this.dispose(); // Cierra la ventana actual si es necesario
+            } else if (esVentas(idPuesto)) {
+                // Redirigir a la ventana ComisionVentas pasando idEmpleado
+                ComisionVentas ventanaVentas = new ComisionVentas(idEmpleado);
+                ventanaVentas.setVisible(true);
+                this.dispose(); // Cierra la ventana actual si es necesario
             } else {
-                JOptionPane.showMessageDialog(this, "Error al obtener el puesto del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El empleado no pertenece a Producción o Ventas.", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de empleado válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al obtener el puesto del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de empleado válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }//GEN-LAST:event_btbIngresarComisionActionPerformed
+
+    private void btbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbCancelarActionPerformed
+        Dashboard ventanaprincipal = new Dashboard();
+        ventanaprincipal.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btbCancelarActionPerformed
 
     /**
      * @param args the command line arguments

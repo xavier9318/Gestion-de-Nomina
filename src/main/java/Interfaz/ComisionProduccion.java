@@ -4,40 +4,35 @@
  */
 package Interfaz;
 
+import com.mycompany.proyectonomina.EmpleadoCBD;
+import com.mycompany.proyectonomina.sql.CConexion;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class ComisionProduccion extends javax.swing.JFrame {
-    
-    private String nombreEmpleado;
-    private String puestoEmpleado;
     private int idEmpleado;
 
-    public ComisionProduccion(int idEmpleado, String nombreEmpleado, String puestoEmpleado) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = nombreEmpleado;
-        this.puestoEmpleado = puestoEmpleado;
-        initComponents(); // Inicializa los componentes de la interfaz
-        // Llenar los campos
-        txtNombre.setText(nombreEmpleado);
-        txtPuesto.setText(puestoEmpleado);
-    }
-// Constructor que acepta un int
     public ComisionProduccion(int idEmpleado) {
         this.idEmpleado = idEmpleado;
-        initComponents(); // Inicializa los componentes de la interfaz
-        llenarDatosEmpleado(idEmpleado);
-    }    
+        initComponents();
+        txtCodigoEmpleado.setText(String.valueOf(idEmpleado));
+        mostrarNombreEmpleado();
+    }
+    
     public ComisionProduccion() {
         initComponents();
     }
-    private void llenarDatosEmpleado(int idEmpleado) {
-        String nombre = obtenerNombreEmpleado(idEmpleado);
-        int idPuesto = obtenerIdPuesto(idEmpleado);
-        String descripcionPuesto = obtenerDescripcionPuesto(idPuesto);
-
-        txtNombre.setText(nombre);
-        txtPuesto.setText(descripcionPuesto);
+    private void mostrarNombreEmpleado() {
+        // Llama al método del DAO para obtener el nombre completo
+        String nombreCompleto = EmpleadoCBD.obtenerNombreCompleto(idEmpleado);
+        txtNombre.setText(nombreCompleto); // Muestra el nombre en el JTextField
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +54,7 @@ public class ComisionProduccion extends javax.swing.JFrame {
         btnGuardarComision = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
-        txtPuesto = new javax.swing.JTextField();
+        txtCodigoEmpleado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,14 +65,29 @@ public class ComisionProduccion extends javax.swing.JFrame {
         jLabel3.setText("Bonificación por pieza (Q0.01)");
 
         btnCalcularComision.setText("Calcular Comisión");
+        btnCalcularComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularComisionActionPerformed(evt);
+            }
+        });
 
         jScrollPane3.setViewportView(txtComision);
 
         jLabel4.setText("Comisión:");
 
         btnGuardarComision.setText("Guardar Comisión");
+        btnGuardarComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarComisionActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,9 +95,9 @@ public class ComisionProduccion extends javax.swing.JFrame {
             }
         });
 
-        txtPuesto.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigoEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPuestoActionPerformed(evt);
+                txtCodigoEmpleadoActionPerformed(evt);
             }
         });
 
@@ -97,17 +107,6 @@ public class ComisionProduccion extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPiezasLaboradas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(jLabel4)
@@ -119,22 +118,34 @@ public class ComisionProduccion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPiezasLaboradas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(89, 89, 89)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPiezasLaboradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,10 +183,85 @@ public class ComisionProduccion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuestoActionPerformed
+    private void txtCodigoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoEmpleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPuestoActionPerformed
+    }//GEN-LAST:event_txtCodigoEmpleadoActionPerformed
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        IngresarComisiones ventanaingresarcomisiones = new IngresarComisiones();
+        ventanaingresarcomisiones.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnCalcularComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularComisionActionPerformed
+            calcularBonificacion(); 
+    }                                                   
+
+    private void calcularBonificacion() {
+        try {
+            // Obtener el total de piezas laboradas del campo de texto
+            int piezasLaboradas = Integer.parseInt(txtPiezasLaboradas.getText().trim());
+
+            // Calcular la bonificación (Q.0.01 por pieza)
+            double bonificacion = piezasLaboradas * 0.01;
+
+            // Mostrar el monto de la bonificación en el JTextPane
+            txtComision.setText(String.format("%.2f", bonificacion)); // Formato con dos decimales
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un número válido en Piezas Laboradas.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCalcularComisionActionPerformed
+
+    private void btnGuardarComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComisionActionPerformed
+            guardarComision();
+    }//GEN-LAST:event_btnGuardarComisionActionPerformed
+    private void guardarComision() {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+
+    try {
+        CConexion cConexion = new CConexion();
+        connection = cConexion.getConnection(); // Obtener la conexión
+
+        if (connection == null) {
+            JOptionPane.showMessageDialog(this, "Error al conectar a la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir si la conexión es nula
+        }
+
+        // Obtener los datos necesarios
+        int idEmpleado = this.idEmpleado; // ID del empleado
+        int numeroPiezas = Integer.parseInt(txtPiezasLaboradas.getText().trim()); // Piezas laboradas
+        double montoTotal = Double.parseDouble(txtComision.getText().trim()); // Monto total de la comisión
+
+        // Consulta SQL para insertar la comisión
+        String sql = "INSERT INTO Bonificacion_Productividad (id_empleado, numero_piezas, monto_total) VALUES (?, ?, ?)";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, idEmpleado);
+        preparedStatement.setInt(2, numeroPiezas);
+        preparedStatement.setDouble(3, montoTotal);
+
+        // Ejecutar la inserción
+        int filasInsertadas = preparedStatement.executeUpdate();
+        if (filasInsertadas > 0) {
+            JOptionPane.showMessageDialog(this, "Comisión guardada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al guardar la comisión.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese un número válido en las piezas o monto.", "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        // Cerrar recursos
+        try {
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cerrar la conexión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -221,9 +307,9 @@ public class ComisionProduccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextPane txtComision;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPiezasLaboradas;
-    private javax.swing.JTextField txtPuesto;
     // End of variables declaration//GEN-END:variables
 }
