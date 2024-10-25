@@ -10,10 +10,9 @@
     import java.sql.SQLException;
     import javax.swing.JOptionPane;
     import com.mycompany.proyectonomina.sql.CConexion;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+    import java.time.LocalDate;
+    import java.time.format.DateTimeFormatter;
+    import java.time.format.DateTimeParseException;
 
   
         public class SolicitudDeAusencia extends javax.swing.JFrame {

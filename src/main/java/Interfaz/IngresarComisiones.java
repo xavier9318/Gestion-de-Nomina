@@ -1,22 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
+
 package Interfaz;
 
-/**
- *
- * @author JAVIERCITO
- */
-public class IngresarComisiones extends javax.swing.JFrame {
+import com.mycompany.proyectonomina.sql.CConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 
-    /**
-     * Creates new form IngresarComisiones
-     */
+
+public class IngresarComisiones extends javax.swing.JFrame {
+     private CConexion conexion;
+
     public IngresarComisiones() {
         initComponents();
+        conexion = new CConexion();
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,13 +36,11 @@ public class IngresarComisiones extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCodigoEmpleado = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtEmpleado = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtPuesto = new javax.swing.JTextPane();
         btbIngresarComision = new javax.swing.JButton();
         btbCancelar = new javax.swing.JButton();
+        txtEmpleado = new javax.swing.JTextField();
+        txtPuesto = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -69,17 +70,30 @@ public class IngresarComisiones extends javax.swing.JFrame {
 
         jLabel2.setText("CODIGO EMPLEADO:");
 
-        jLabel3.setText("Nombre Empleado:");
+        txtCodigoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoEmpleadoActionPerformed(evt);
+            }
+        });
 
-        jScrollPane1.setViewportView(txtEmpleado);
+        jLabel3.setText("Nombre Empleado:");
 
         jLabel4.setText("Puesto:");
 
-        jScrollPane2.setViewportView(txtPuesto);
-
         btbIngresarComision.setText("Ingresar Comisión");
+        btbIngresarComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbIngresarComisionActionPerformed(evt);
+            }
+        });
 
         btbCancelar.setText("Cancelar");
+
+        txtPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPuestoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,23 +106,20 @@ public class IngresarComisiones extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btbIngresarComision, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(95, Short.MAX_VALUE))
+                                .addComponent(btbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,14 +136,13 @@ public class IngresarComisiones extends javax.swing.JFrame {
                     .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel3)
+                    .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btbIngresarComision)
                     .addComponent(btbCancelar))
@@ -154,6 +164,188 @@ public class IngresarComisiones extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCodigoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoEmpleadoActionPerformed
+        try {
+            int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText());
+            // Obtener el nombre y el idPuesto
+            Map<String, Integer> empleadoInfo = obtenerNombreYPuesto(idEmpleado);
+            
+            if (!empleadoInfo.isEmpty()) {
+                String nombreCompleto = empleadoInfo.keySet().iterator().next(); // Obtiene el nombre completo
+                int idPuesto = empleadoInfo.get(nombreCompleto); // Obtiene el id del puesto
+
+                txtEmpleado.setText(nombreCompleto);
+
+                // Obtener la descripción del puesto usando el idPuesto
+                String descripcionPuesto = obtenerDescripcionPuesto(idPuesto);
+                txtPuesto.setText(descripcionPuesto != null ? descripcionPuesto : "Puesto no encontrado.");
+            } else {
+                txtEmpleado.setText("");
+                txtPuesto.setText("");
+                JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtEmpleado.setText("");
+            txtPuesto.setText("");
+        }
+    }
+
+    
+    private String obtenerNombreEmpleado(int idEmpleado) {
+        String nombre = null;
+        Connection conn = null;
+
+        try {
+            conn = conexion.establecerConexion();
+            PreparedStatement stmt = conn.prepareStatement("SELECT nombre, apellido FROM Empleado WHERE id_empleado = ?");
+            stmt.setInt(1, idEmpleado);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nombre = rs.getString("nombre").trim() + " " + rs.getString("apellido").trim();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener datos del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error al cerrar la conexión.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        return nombre;
+    }
+        private String obtenerDescripcionPuesto(int idPuesto) {
+        String descripcion = null;
+        Connection conn = null;
+
+        try {
+            conn = conexion.establecerConexion();
+            PreparedStatement stmt = conn.prepareStatement("SELECT descripcion FROM Puesto WHERE id_puesto = ?");
+            stmt.setInt(1, idPuesto);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                descripcion = rs.getString("descripcion").trim();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener la descripción del puesto.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error al cerrar la conexión.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        return descripcion;
+}
+
+      private Map<String, Integer> obtenerNombreYPuesto(int idEmpleado) {
+        Map<String, Integer> empleadoInfo = new HashMap<>();
+        Connection conn = null;
+
+        try {
+            conn = conexion.establecerConexion();
+            PreparedStatement stmt = conn.prepareStatement("SELECT nombre, apellido, id_puesto FROM Empleado WHERE id_empleado = ?");
+            stmt.setInt(1, idEmpleado);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String nombreCompleto = rs.getString("nombre").trim() + " " + rs.getString("apellido").trim();
+                int idPuesto = rs.getInt("id_puesto");
+                empleadoInfo.put(nombreCompleto, idPuesto);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener datos del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error al cerrar la conexión.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        return empleadoInfo;
+}
+        private int obtenerIdPuesto(int idEmpleado) {
+        int idPuesto = -1; // Valor por defecto si no se encuentra
+        Connection conn = null;
+
+        try {
+            conn = conexion.establecerConexion();
+            PreparedStatement stmt = conn.prepareStatement("SELECT id_puesto FROM Empleado WHERE id_empleado = ?");
+            stmt.setInt(1, idEmpleado);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                idPuesto = rs.getInt("id_puesto");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener el ID del puesto del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error al cerrar la conexión.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        return idPuesto;
+    }
+        private boolean esProduccion(int idPuesto) {
+        return idPuesto == 2;
+    }
+
+    private boolean esVentas(int idPuesto) {
+        return idPuesto == 1;
+    
+
+
+    }//GEN-LAST:event_txtCodigoEmpleadoActionPerformed
+
+    private void txtPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuestoActionPerformed
+     
+    }//GEN-LAST:event_txtPuestoActionPerformed
+
+    private void btbIngresarComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbIngresarComisionActionPerformed
+       try {
+            int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText());
+            int idPuesto = obtenerIdPuesto(idEmpleado); // Obtener el id del puesto
+
+            if (idPuesto != -1) {
+                if (esProduccion(idPuesto)) {
+                    // Redirigir a la ventana ComisionProduccion
+                    ComisionProduccion ventanaProduccion = new ComisionProduccion(idEmpleado);
+                    ventanaProduccion.setVisible(true);
+                    this.dispose(); // Cierra la ventana actual si es necesario
+                } else if (esVentas(idPuesto)) {
+                    // Redirigir a la ventana ComisionVentas
+                    ComisionVentas ventanaVentas = new ComisionVentas(idEmpleado);
+                    ventanaVentas.setVisible(true);
+                    this.dispose(); // Cierra la ventana actual si es necesario
+                } else {
+                    JOptionPane.showMessageDialog(this, "El empleado no pertenece a Producción o Ventas.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al obtener el puesto del empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de empleado válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btbIngresarComisionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +376,7 @@ public class IngresarComisiones extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new IngresarComisiones().setVisible(true);
             }
@@ -200,10 +393,8 @@ public class IngresarComisiones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtCodigoEmpleado;
-    private javax.swing.JTextPane txtEmpleado;
-    private javax.swing.JTextPane txtPuesto;
+    private javax.swing.JTextField txtEmpleado;
+    private javax.swing.JTextField txtPuesto;
     // End of variables declaration//GEN-END:variables
 }
