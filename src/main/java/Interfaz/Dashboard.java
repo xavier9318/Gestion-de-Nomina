@@ -55,11 +55,14 @@ public class Dashboard extends javax.swing.JFrame {
         mnuGestionNomina = new javax.swing.JMenu();
         mntIngresarComisiones = new javax.swing.JMenuItem();
         mntPrestaciones = new javax.swing.JMenuItem();
+        mntAnticipoQuincena = new javax.swing.JMenuItem();
+        mntHorasExtras = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         mnuIngresarPrestamo = new javax.swing.JMenuItem();
         mnuEstadoCuenta = new javax.swing.JMenuItem();
         mnuComprasTienda = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -196,6 +199,26 @@ public class Dashboard extends javax.swing.JFrame {
         });
         mnuGestionNomina.add(mntPrestaciones);
 
+        mntAnticipoQuincena.setBackground(new java.awt.Color(204, 204, 255));
+        mntAnticipoQuincena.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        mntAnticipoQuincena.setText("Anticipo Quincena");
+        mntAnticipoQuincena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntAnticipoQuincenaActionPerformed(evt);
+            }
+        });
+        mnuGestionNomina.add(mntAnticipoQuincena);
+
+        mntHorasExtras.setBackground(new java.awt.Color(204, 204, 255));
+        mntHorasExtras.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        mntHorasExtras.setText("Horas Extras");
+        mntHorasExtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntHorasExtrasActionPerformed(evt);
+            }
+        });
+        mnuGestionNomina.add(mntHorasExtras);
+
         jMenuBar1.add(mnuGestionNomina);
 
         jMenu7.setBackground(new java.awt.Color(204, 204, 204));
@@ -235,8 +258,19 @@ public class Dashboard extends javax.swing.JFrame {
         jMenuBar1.add(jMenu7);
 
         jMenu8.setBackground(new java.awt.Color(204, 204, 204));
-        jMenu8.setText("jMenu8");
+        jMenu8.setText("Tools");
         jMenu8.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+
+        jMenuItem2.setBackground(new java.awt.Color(204, 204, 255));
+        jMenuItem2.setFont(new java.awt.Font("Roboto Medium", 1, 12)); // NOI18N
+        jMenuItem2.setText("Crear Usuario");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem2);
+
         jMenuBar1.add(jMenu8);
 
         setJMenuBar(jMenuBar1);
@@ -292,6 +326,24 @@ public class Dashboard extends javax.swing.JFrame {
         ventanatiendasolidaria.setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_mnuComprasTiendaActionPerformed
+
+    private void mntAnticipoQuincenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAnticipoQuincenaActionPerformed
+        AnticipoSalario ventanaanticiposalario = new AnticipoSalario();
+        ventanaanticiposalario.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_mntAnticipoQuincenaActionPerformed
+
+    private void mntHorasExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntHorasExtrasActionPerformed
+        HorasExtras ventanahorasextras = new HorasExtras();
+        ventanahorasextras.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_mntHorasExtrasActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        CrearUsuario ventanacrearusuario = new CrearUsuario();
+        ventanacrearusuario.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     
 
 
@@ -347,10 +399,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JMenuItem mntAnticipoQuincena;
     private javax.swing.JMenuItem mntAutorizarAusencia;
+    private javax.swing.JMenuItem mntHorasExtras;
     private javax.swing.JMenuItem mntIngresarComisiones;
     private javax.swing.JMenuItem mntIngresarEmpleado;
     private javax.swing.JMenuItem mntPrestaciones;

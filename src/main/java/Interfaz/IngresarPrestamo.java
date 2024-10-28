@@ -248,37 +248,46 @@ public class IngresarPrestamo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcularCuotaActionPerformed
 
     private void btnGuardarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPrestamoActionPerformed
-        try {
-        // Obtener los datos del formulario
+       try {
         int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText().trim());
-        LocalDate fechaPrestamo = LocalDate.parse(txtFechaPrestamo.getText().trim());
+        LocalDate fechaSolicitud = LocalDate.parse(txtFechaPrestamo.getText().trim());
         double montoPrestamo = Double.parseDouble(txtMontoPrestamo.getText().trim());
-        int plazoMeses = cbxPlazoPrestamo.getSelectedIndex() == 0 ? 6 : cbxPlazoPrestamo.getSelectedIndex() == 1 ? 12 : 18;
-        double cuotaMensual = Double.parseDouble(txtCuotaMensual.getText().trim());
+        int plazoMeses = cbxPlazoPrestamo.getSelectedIndex(); // 0 para 6 meses, 1 para 12 meses, 2 para 18 meses
+        double interes = 0.0;
 
-        // Verificar si ya existe un préstamo para el empleado
-        PrestamoCBD prestamoCBD = new PrestamoCBD(); // Crear instancia de PrestamoCBD
-        if (prestamoCBD.verificarPrestamoExistente(idEmpleado)) { // Usar el método para verificar
-            JOptionPane.showMessageDialog(this, "El empleado ya tiene un préstamo activo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método si el préstamo ya existe
+        // Determinar el interés basado en el plazo
+        switch (plazoMeses) {
+            case 0: // 6 meses
+                interes = 0.04; // 4%
+                break;
+            case 1: // 12 meses
+                interes = 0.06; // 6%
+                break;
+            case 2: // 18 meses
+                interes = 0.10; // 10%
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Seleccione un plazo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
         }
 
-        // Insertar el préstamo en la base de datos
-        prestamoCBD.guardarPrestamo(idEmpleado, fechaPrestamo, montoPrestamo, plazoMeses, cuotaMensual);
-        JOptionPane.showMessageDialog(this, "Préstamo guardado exitosamente.");
-        
-        // Limpiar los campos después de guardar
-        txtCodigoEmpleado.setText("");
-        txtNombre.setText("");
-        txtFechaPrestamo.setText("");
-        txtMontoPrestamo.setText("");
-        txtCuotaMensual.setText("");
-        cbxPlazoPrestamo.setSelectedIndex(0);
+        // Calcular el monto total con interés
+        double montoTotal = montoPrestamo * (1 + interes);
+        double cuotaMensual = montoTotal / (plazoMeses == 0 ? 6 : plazoMeses == 1 ? 12 : 18);
+
+        // Guardar en la base de datos
+        PrestamoCBD prestamoCBD = new PrestamoCBD();
+        boolean exito = prestamoCBD.guardarPrestamo(idEmpleado, fechaSolicitud, montoPrestamo, plazoMeses == 0 ? 6 : plazoMeses == 1 ? 12 : 18, montoTotal, cuotaMensual);
+
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Préstamo guardado exitosamente.");
+            txtCuotaMensual.setText(String.format("%.2f", cuotaMensual));
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al guardar el préstamo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Por favor ingrese datos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al guardar el préstamo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Por favor ingrese los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnGuardarPrestamoActionPerformed
     
