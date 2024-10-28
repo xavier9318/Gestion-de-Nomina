@@ -23,187 +23,247 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="689" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="375" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="127" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtTotalVenta" min="-2" pref="91" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane4" min="-2" pref="114" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane3" min="-2" pref="53" max="-2" attributes="0"/>
-                                      <Component id="btnCalcularComision" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btnGuardarComision" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                          <Component id="btnRegresar" min="-2" pref="78" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtNombre" min="-2" pref="272" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtCodigoEmpleado" min="-2" pref="74" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="256" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="204" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="txtTotalVenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="btnCalcularComision" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnGuardarComision" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCodigoEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Black" size="36" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Comisiones de Ventas"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="160" y="10" width="400" height="40"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="108" y="73" width="256" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Total Venta Realizada:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="50" y="110" width="-1" height="25"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTotalVenta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="110" width="91" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Porcentaje de comision:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="50" y="160" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane3">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="150" width="53" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtPorcentaje">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnCalcularComision">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Calcular Comisi&#xf3;n"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcularComisionActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="200" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Comisi&#xf3;n:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="140" y="250" width="71" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane4">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="240" width="114" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtComision">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnGuardarComision">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Guardar Comisi&#xf3;n"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarComisionActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="130" y="290" width="200" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="360" y="290" width="130" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombre">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="320" y="60" width="272" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodigoEmpleado">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="60" width="90" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
       </SubComponents>
     </Container>

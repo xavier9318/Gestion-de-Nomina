@@ -37,147 +37,119 @@
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtCodigoEmpleado = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtFechaInicio = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtFechaFinal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtCodigoEmpleado = new javax.swing.JTextField();
+        txtNombreEmpleado = new javax.swing.JTextField();
+        txtFechaInicio = new javax.swing.JTextField();
+        txtFechaFinal = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         btnEnviar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        txtNombreEmpleado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Código de Empleado:");
+        jLabel5.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel5.setText("Motivo:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 250, 80, -1));
 
+        txtMotivo.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtMotivo.setColumns(20);
+        txtMotivo.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtMotivo.setRows(5);
+        jScrollPane2.setViewportView(txtMotivo);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 273, 322, 70));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
+        jLabel6.setText("SOLICITUD DE AUSENCIA");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 8, 470, 30));
+
+        txtCodigoEmpleado.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtCodigoEmpleado.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         txtCodigoEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoEmpleadoActionPerformed(evt);
             }
         });
+        jPanel1.add(txtCodigoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 74, -1));
 
-        jLabel2.setText("Nombre Empleado: ");
-
-        jLabel3.setText("Fecha de Final :");
-
-        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaInicioActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Fecha de Inicio :");
-
-        txtFechaFinal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaFinalActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Motivo:");
-
-        txtMotivo.setColumns(20);
-        txtMotivo.setRows(5);
-        jScrollPane2.setViewportView(txtMotivo);
-
-        btnEnviar.setText("Enviar");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarActionPerformed(evt);
-            }
-        });
-
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("SOLICITUD DE AUSENCIA");
-
+        txtNombreEmpleado.setEditable(false);
+        txtNombreEmpleado.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtNombreEmpleado.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         txtNombreEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreEmpleadoActionPerformed(evt);
             }
         });
+        jPanel1.add(txtNombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 310, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(27, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(448, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnEnviar))
-                .addContainerGap(26, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(141, 141, 141)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(248, Short.MAX_VALUE)))
-        );
+        txtFechaInicio.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtFechaInicio.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaInicioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 136, 90, -1));
+
+        txtFechaFinal.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtFechaFinal.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtFechaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaFinalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 74, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel4.setText("Fecha de Inicio :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 120, 29));
+
+        jLabel3.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel3.setText("Fecha de Final :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 120, 29));
+
+        jLabel2.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel2.setText("Nombre Empleado: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel1.setText("Código de Empleado:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 160, -1));
+
+        btnEnviar.setBackground(new java.awt.Color(153, 153, 153));
+        btnEnviar.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnEnviar.setText("Enviar");
+        btnEnviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 120, -1));
+
+        btnRegresar.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegresar.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 120, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -337,6 +309,7 @@
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextField txtFechaFinal;

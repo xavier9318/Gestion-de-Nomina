@@ -33,4 +33,24 @@ public class EmpleadoCBD {
         }
         return nombreCompleto;
     }
+    public static double obtenerSueldo(int idEmpleado) {
+    double sueldo = 0.0;
+    String sql = "SELECT sueldo_base FROM Empleado WHERE id_empleado = ?";
+    
+    CConexion conexion = new CConexion();
+    try (Connection con = conexion.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+         
+        ps.setInt(1, idEmpleado);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                sueldo = rs.getDouble("sueldo_base");
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace(); // Muestra el error en la consola
+    }
+    return sueldo;
+}
 }

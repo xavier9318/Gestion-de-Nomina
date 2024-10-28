@@ -3,11 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+import com.mycompany.proyectonomina.EmpleadoCBD;
+import com.mycompany.proyectonomina.PrestacionLaboral;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author JAVIERCITO
- */
 public class PRESTACIONES extends javax.swing.JFrame {
 
     /**
@@ -15,7 +20,71 @@ public class PRESTACIONES extends javax.swing.JFrame {
      */
     public PRESTACIONES() {
         initComponents();
+        inicializarTablaPrestacion();
+        
+        txtCodigoEmpleado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cargarNombreEmpleado();
+              }
+        });
     }
+    
+    private void cargarNombreEmpleado() {
+        try {
+        int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText().trim());
+        String nombreCompleto = EmpleadoCBD.obtenerNombreCompleto(idEmpleado);
+        double sueldoEmpleado = EmpleadoCBD.obtenerSueldo(idEmpleado); // Método para obtener el sueldo
+
+        if (!nombreCompleto.trim().isEmpty()) {
+            txtNombre.setText(nombreCompleto);
+            txtSueldo.setText(String.valueOf(sueldoEmpleado)); // Muestra el sueldo en txtSueldo
+        } else {
+            JOptionPane.showMessageDialog(this, "Empleado no encontrado.");
+            txtNombre.setText("");
+            txtSueldo.setText(""); // Limpia el sueldo si no se encuentra al empleado
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de empleado válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }
+    private void calcularPrestacion() {
+    int tipoPrestacion = cmbTipoPrestacion.getSelectedIndex();
+    String tipoPrestacionTexto = tipoPrestacion == 0 ? "Bono 14" : "Aguinaldo";
+
+    try {
+        double sueldo = Double.parseDouble(txtSueldo.getText().trim());
+        // Leer las fechas desde los campos de texto
+        LocalDate fechaInicio = LocalDate.parse(txtFechaInicio.getText());
+        LocalDate fechaFinal = LocalDate.parse(txtFechaFinal.getText());
+
+        // Asegurarse de que la fecha final no sea anterior a la fecha de inicio
+        if (fechaFinal.isBefore(fechaInicio)) {
+            JOptionPane.showMessageDialog(this, "La fecha final no puede ser anterior a la fecha de inicio.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Calcular días entre las fechas
+        long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFinal) + 1; // Incluyendo el último día
+        double calculoPrestacion = (sueldo / 365) * dias;
+
+        // Agregar el resultado a la tabla
+        DefaultTableModel model = (DefaultTableModel) tblDetallePrestacion.getModel();
+        model.addRow(new Object[]{tipoPrestacionTexto, fechaInicio, fechaFinal, sueldo, calculoPrestacion});
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error en los datos ingresados: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+
+
+
+private void inicializarTablaPrestacion() {
+    DefaultTableModel model = new DefaultTableModel(new String[]{"Tipo Prestacion", "Fecha Inicio", "Fecha Final", "Sueldo", "Calculo Prestacion"}, 0);
+    tblDetallePrestacion.setModel(model);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,19 +97,23 @@ public class PRESTACIONES extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtCodigoEmpleado = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        cmbTipoPrestacion = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        txtFechaInicio = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        btbGuardar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txtSueldo = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDetallePrestacion = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtCodigoEmpleado = new javax.swing.JTextField();
+        cmbTipoPrestacion = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtFechaInicio = new javax.swing.JTextField();
+        txtFechaFinal = new javax.swing.JTextField();
+        txtSueldo = new javax.swing.JTextField();
+        btnCalcularPrestacion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -57,29 +130,28 @@ public class PRESTACIONES extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setText("PRESTACION LABORAL");
-
+        jLabel2.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         jLabel2.setText("Código Empleado:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 67, 130, -1));
 
-        jLabel3.setText("Tipo de prestacion:");
-
-        cmbTipoPrestacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BONO14", "AGUINALDO" }));
-
-        jLabel4.setText("Fecha Inicio:");
-
-        jButton1.setText("Calcular Prestacion");
-
-        btbGuardar.setText("Guardar");
-        btbGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(153, 153, 153));
+        btnGuardar.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btbGuardarActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 380, 140, -1));
 
+        jLabel5.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         jLabel5.setText("Sueldo:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 221, 80, -1));
 
+        tblDetallePrestacion.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         tblDetallePrestacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -106,85 +178,156 @@ public class PRESTACIONES extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDetallePrestacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(tblDetallePrestacion);
 
-        btnRegresar.setText("Regresar");
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 306, 641, 46));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbTipoPrestacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCodigoEmpleado)
-                            .addComponent(txtFechaInicio)
-                            .addComponent(txtSueldo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cmbTipoPrestacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btbGuardar)
-                    .addComponent(btnRegresar))
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
+        jLabel6.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel6.setText("Fecha Final:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 192, 100, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
+        jLabel1.setText("PRESTACION LABORAL");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 400, 40));
+
+        txtNombre.setEditable(false);
+        txtNombre.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtNombre.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 310, -1));
+
+        txtCodigoEmpleado.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtCodigoEmpleado.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jPanel1.add(txtCodigoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 95, -1));
+
+        cmbTipoPrestacion.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        cmbTipoPrestacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BONO14", "AGUINALDO" }));
+        cmbTipoPrestacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoPrestacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbTipoPrestacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 150, -1));
+
+        jLabel3.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel3.setText("Tipo de prestacion:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 140, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        jLabel4.setText("Fecha Inicio:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 100, -1));
+
+        txtFechaInicio.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtFechaInicio.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaInicioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 95, -1));
+
+        txtFechaFinal.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jPanel1.add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 95, -1));
+
+        txtSueldo.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtSueldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSueldoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 96, -1));
+
+        btnCalcularPrestacion.setBackground(new java.awt.Color(153, 153, 153));
+        btnCalcularPrestacion.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnCalcularPrestacion.setText("Calcular Prestacion");
+        btnCalcularPrestacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcularPrestacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularPrestacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCalcularPrestacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 170, -1));
+
+        btnRegresar.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegresar.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 140, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbGuardarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+        int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText().trim());
+        String tipoPrestacion = cmbTipoPrestacion.getSelectedItem().toString();
+        
+        // Parsear las fechas desde los campos de texto de la interfaz
+        java.util.Date fechaInicioUtil = new SimpleDateFormat("yyyy-MM-dd").parse(txtFechaInicio.getText().trim());
+        java.util.Date fechaFinalUtil = new SimpleDateFormat("yyyy-MM-dd").parse(txtFechaFinal.getText().trim());
+        
+        java.sql.Date fechaInicio = new java.sql.Date(fechaInicioUtil.getTime());
+        java.sql.Date fechaFinal = new java.sql.Date(fechaFinalUtil.getTime());
+        // Calcular el monto de la prestación (implementa un método adecuado si aún no lo has hecho)
+        double montoPrestacion = calcularMontoPrestacion(); // Método personalizado que debes implementar
+
+        // Llamar al método para guardar en la base de datos
+        PrestacionLaboral.guardarPrestacionLaboral(idEmpleado, tipoPrestacion, fechaInicio, fechaFinal, montoPrestacion);
+        
+        JOptionPane.showMessageDialog(this, "Prestación guardada correctamente.");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de empleado válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (ParseException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese fechas válidas en formato yyyy-MM-dd.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al guardar la prestación.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+    private double calcularMontoPrestacion() {
+    try {
+        double sueldo = Double.parseDouble(txtSueldo.getText().trim());
+        LocalDate fechaInicio = LocalDate.parse(txtFechaInicio.getText());
+        LocalDate fechaFinal = LocalDate.parse(txtFechaFinal.getText());
+        long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFinal) + 1;
+        return (sueldo / 365) * dias;
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al calcular la prestación.", "Error", JOptionPane.ERROR_MESSAGE);
+        return 0;
+    }
+    }
+
+    private void cmbTipoPrestacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPrestacionActionPerformed
         // TODO add your handling code here:
-        
-      System.out.print(this.cmbTipoPrestacion.getSelectedIndex()+1);
-      
-      
-        
-    }//GEN-LAST:event_btbGuardarActionPerformed
+    }//GEN-LAST:event_cmbTipoPrestacionActionPerformed
+
+    private void txtFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaInicioActionPerformed
+
+    private void txtSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSueldoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSueldoActionPerformed
+
+    private void btnCalcularPrestacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPrestacionActionPerformed
+        calcularPrestacion();
+    }//GEN-LAST:event_btnCalcularPrestacionActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        Dashboard ventanaprincipal = new Dashboard();
+        ventanaprincipal.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,21 +365,25 @@ public class PRESTACIONES extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btbGuardar;
+    private javax.swing.JButton btnCalcularPrestacion;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cmbTipoPrestacion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tblDetallePrestacion;
     private javax.swing.JTextField txtCodigoEmpleado;
+    private javax.swing.JTextField txtFechaFinal;
     private javax.swing.JTextField txtFechaInicio;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSueldo;
     // End of variables declaration//GEN-END:variables
 }

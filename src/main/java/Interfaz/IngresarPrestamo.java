@@ -4,10 +4,12 @@
  */
 package Interfaz;
 
-/**
- *
- * @author JAVIERCITO
- */
+import com.mycompany.proyectonomina.EmpleadoCBD;
+import com.mycompany.proyectonomina.PrestamoCBD;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+
+
 public class IngresarPrestamo extends javax.swing.JFrame {
 
     /**
@@ -15,7 +17,32 @@ public class IngresarPrestamo extends javax.swing.JFrame {
      */
     public IngresarPrestamo() {
         initComponents();
+        
+        txtCodigoEmpleado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cargarNombreEmpleado();
+              }
+        });
     }
+    private void cargarNombreEmpleado() {
+        try {
+        int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText().trim());
+        String nombreCompleto = EmpleadoCBD.obtenerNombreCompleto(idEmpleado);
+        
+
+        if (!nombreCompleto.trim().isEmpty()) {
+            txtNombre.setText(nombreCompleto);
+          
+        } else {
+            JOptionPane.showMessageDialog(this, "Empleado no encontrado.");
+            txtNombre.setText("");
+            
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de empleado válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +58,7 @@ public class IngresarPrestamo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCodigoEmpleado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtNombre = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         txtFechaPrestamo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -41,132 +68,128 @@ public class IngresarPrestamo extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtCuotaMensual = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
+        btnCalcularCuota = new javax.swing.JButton();
         btnGuardarPrestamo = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
         jLabel1.setText("INGRESAR PRESTAMO");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, 28));
 
+        jLabel2.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         jLabel2.setText("Ingresar el código del Empleado:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 54, 230, 33));
 
-        jScrollPane1.setViewportView(jTextPane1);
+        txtCodigoEmpleado.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtCodigoEmpleado.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jPanel1.add(txtCodigoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 59, 74, -1));
 
+        jScrollPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+
+        txtNombre.setEditable(false);
+        txtNombre.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtNombre.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(txtNombre);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 94, 280, -1));
+
+        jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel3.setText("Ingreso de Fecha Prestamo:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 136, 210, -1));
 
+        txtFechaPrestamo.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtFechaPrestamo.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtFechaPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaPrestamoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFechaPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 133, 111, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         jLabel4.setText("Monto Prestamo:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
 
+        txtMontoPrestamo.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtMontoPrestamo.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtMontoPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoPrestamoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtMontoPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 168, 111, -1));
+
+        jLabel5.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         jLabel5.setText("Plazo de Prestamo (meses):");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 203, -1, 24));
 
-        cbxPlazoPrestamo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxPlazoPrestamo.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        cbxPlazoPrestamo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6 meses", "12 meses", "18 meses", " " }));
         cbxPlazoPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxPlazoPrestamoActionPerformed(evt);
             }
         });
+        jPanel1.add(cbxPlazoPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 203, 100, -1));
 
+        jLabel6.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         jLabel6.setText("Cuota Mensual:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 276, -1, -1));
 
+        txtCuotaMensual.setEditable(false);
+        txtCuotaMensual.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtCuotaMensual.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jScrollPane2.setViewportView(txtCuotaMensual);
 
-        jButton1.setText("Calcular Cuota");
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 276, 233, -1));
 
+        btnCalcularCuota.setBackground(new java.awt.Color(153, 153, 153));
+        btnCalcularCuota.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnCalcularCuota.setText("Calcular Cuota");
+        btnCalcularCuota.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcularCuota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularCuotaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCalcularCuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
+
+        btnGuardarPrestamo.setBackground(new java.awt.Color(153, 153, 153));
+        btnGuardarPrestamo.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
         btnGuardarPrestamo.setText("Guardar Prestamo");
+        btnGuardarPrestamo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPrestamoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardarPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 355, -1, -1));
 
+        btnRegresar.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegresar.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
         btnRegresar.setText("Regresar");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 85, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94)
-                        .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnGuardarPrestamo)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6))))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtFechaPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtMontoPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxPlazoPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(138, 138, 138))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(255, 255, 255))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodigoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtFechaPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMontoPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxPlazoPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarPrestamo)
-                    .addComponent(btnRegresar)))
-        );
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 355, 120, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 69, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
 
         pack();
@@ -175,6 +198,90 @@ public class IngresarPrestamo extends javax.swing.JFrame {
     private void cbxPlazoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPlazoPrestamoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxPlazoPrestamoActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        Dashboard ventanaprincipal = new Dashboard();
+        ventanaprincipal.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtFechaPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaPrestamoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaPrestamoActionPerformed
+
+    private void txtMontoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoPrestamoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMontoPrestamoActionPerformed
+
+    private void btnCalcularCuotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularCuotaActionPerformed
+        try {
+        double montoPrestamo = Double.parseDouble(txtMontoPrestamo.getText().trim());
+        int plazoMeses = cbxPlazoPrestamo.getSelectedIndex(); // 0 para 6 meses, 1 para 12 meses, 2 para 18 meses
+        double interes = 0.0;
+
+        // Determinar el interés basado en el plazo
+        switch (plazoMeses) {
+            case 0: // 6 meses
+                interes = 0.04; // 4%
+                break;
+            case 1: // 12 meses
+                interes = 0.06; // 6%
+                break;
+            case 2: // 18 meses
+                interes = 0.10; // 10%
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Seleccione un plazo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+
+        // Calcular la cuota mensual
+        double montoTotal = montoPrestamo * (1 + interes); // Monto total a pagar con interés
+        double cuotaMensual = montoTotal / (plazoMeses == 0 ? 6 : plazoMeses == 1 ? 12 : 18); // Dividir entre el plazo correspondiente
+
+        // Mostrar el resultado en el campo de texto
+        txtCuotaMensual.setText(String.format("%.2f", cuotaMensual));
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese un monto de préstamo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnCalcularCuotaActionPerformed
+
+    private void btnGuardarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPrestamoActionPerformed
+        try {
+        // Obtener los datos del formulario
+        int idEmpleado = Integer.parseInt(txtCodigoEmpleado.getText().trim());
+        LocalDate fechaPrestamo = LocalDate.parse(txtFechaPrestamo.getText().trim());
+        double montoPrestamo = Double.parseDouble(txtMontoPrestamo.getText().trim());
+        int plazoMeses = cbxPlazoPrestamo.getSelectedIndex() == 0 ? 6 : cbxPlazoPrestamo.getSelectedIndex() == 1 ? 12 : 18;
+        double cuotaMensual = Double.parseDouble(txtCuotaMensual.getText().trim());
+
+        // Verificar si ya existe un préstamo para el empleado
+        PrestamoCBD prestamoCBD = new PrestamoCBD(); // Crear instancia de PrestamoCBD
+        if (prestamoCBD.verificarPrestamoExistente(idEmpleado)) { // Usar el método para verificar
+            JOptionPane.showMessageDialog(this, "El empleado ya tiene un préstamo activo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si el préstamo ya existe
+        }
+
+        // Insertar el préstamo en la base de datos
+        prestamoCBD.guardarPrestamo(idEmpleado, fechaPrestamo, montoPrestamo, plazoMeses, cuotaMensual);
+        JOptionPane.showMessageDialog(this, "Préstamo guardado exitosamente.");
+        
+        // Limpiar los campos después de guardar
+        txtCodigoEmpleado.setText("");
+        txtNombre.setText("");
+        txtFechaPrestamo.setText("");
+        txtMontoPrestamo.setText("");
+        txtCuotaMensual.setText("");
+        cbxPlazoPrestamo.setSelectedIndex(0);
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese datos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar el préstamo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnGuardarPrestamoActionPerformed
+    
 
     /**
      * @param args the command line arguments
@@ -212,10 +319,10 @@ public class IngresarPrestamo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcularCuota;
     private javax.swing.JButton btnGuardarPrestamo;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbxPlazoPrestamo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -225,10 +332,10 @@ public class IngresarPrestamo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextPane txtCuotaMensual;
     private javax.swing.JTextField txtFechaPrestamo;
     private javax.swing.JTextField txtMontoPrestamo;
+    private javax.swing.JTextPane txtNombre;
     // End of variables declaration//GEN-END:variables
 }

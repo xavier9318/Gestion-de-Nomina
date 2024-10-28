@@ -23,326 +23,395 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" pref="849" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" pref="475" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel5" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jLabel7" alignment="0" pref="92" max="32767" attributes="0"/>
-                                          <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPane3" pref="104" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane2" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane6" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPane7" max="32767" attributes="0"/>
-                                              <Component id="jScrollPane8" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="btnRegresar" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jLabel2" min="-2" pref="41" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                                  <Component id="txtCodigoEmpleado" min="-2" pref="74" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <Component id="jScrollPane1" min="-2" pref="475" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-                  <Component id="btnDescargar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCodigoEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jScrollPane6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" pref="16" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane8" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnDescargar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="95" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Black" size="36" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Estado de Cuenta del Pr&#xe9;stamo"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="189" y="13" width="518" height="33"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="179" y="93" width="41" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ingresar C&#xf3;digo:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="85" y="67" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodigoEmpleado">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="14" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="60" width="74" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="85" y="100" width="475" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtNombre">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Monto del Pr&#xe9;stamo:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="85" y="154" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="240" y="150" width="104" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtMontoPrestamo">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Saldo Pendiente"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="85" y="200" width="116" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane3">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="240" y="190" width="104" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtSaldoPendiente">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cuota Mensual:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="85" y="244" width="120" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane4">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="240" y="230" width="104" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtCuotaMensual">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Meses Pagados:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="85" y="288" width="120" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane5">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="240" y="280" width="104" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtMesesPagados">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Meses Restantes:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="363" y="154" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane6">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="500" y="150" width="240" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtMesesRestantes">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Fecha de Inicio:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="363" y="200" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane7">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="500" y="190" width="244" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtFechaInicio">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Fecha Final:"/>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="363" y="244" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane8">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="500" y="230" width="244" height="-1"/>
+            </Constraint>
+          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTextPane" name="txtFechaFinal">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e3" green="e3" id="Button.light" palette="3" red="e3" type="palette"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Rockwell" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnDescargar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Descargar Estado de Cuenta"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="135" y="355" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto Medium" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="506" y="355" width="160" height="-1"/>
+            </Constraint>
+          </Constraints>
         </Component>
       </SubComponents>
     </Container>
