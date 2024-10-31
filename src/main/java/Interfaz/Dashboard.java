@@ -57,6 +57,7 @@ public class Dashboard extends javax.swing.JFrame {
         mntPrestaciones = new javax.swing.JMenuItem();
         mntAnticipoQuincena = new javax.swing.JMenuItem();
         mntHorasExtras = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         mnuIngresarPrestamo = new javax.swing.JMenuItem();
         mnuEstadoCuenta = new javax.swing.JMenuItem();
@@ -219,6 +220,16 @@ public class Dashboard extends javax.swing.JFrame {
         });
         mnuGestionNomina.add(mntHorasExtras);
 
+        jMenuItem3.setBackground(new java.awt.Color(204, 204, 255));
+        jMenuItem3.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        jMenuItem3.setText("Generar Nomina");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mnuGestionNomina.add(jMenuItem3);
+
         jMenuBar1.add(mnuGestionNomina);
 
         jMenu7.setBackground(new java.awt.Color(204, 204, 204));
@@ -344,6 +355,12 @@ public class Dashboard extends javax.swing.JFrame {
         ventanacrearusuario.setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        NominaVentana ventananominaventana = new NominaVentana();
+        ventananominaventana.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     
 
 
@@ -400,6 +417,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

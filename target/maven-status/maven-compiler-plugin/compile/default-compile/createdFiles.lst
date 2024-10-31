@@ -24,6 +24,7 @@ Interfaz\CrearUsuario$7.class
 Interfaz\CalcularLiquidacion.class
 Interfaz\IngresarComisiones$3.class
 Interfaz\SolicitudDeAusencia$5.class
+Interfaz\NominaVentana$4.class
 Interfaz\IngresarComisiones.class
 Interfaz\TiendaSolidaria$2.class
 Interfaz\CalcularLiquidacion$1.class
@@ -43,6 +44,7 @@ Interfaz\AnticipoSalario$8.class
 Interfaz\ComisionVentas.class
 Interfaz\IngresarPrestamo$4.class
 com\mycompany\proyectonomina\Comision.class
+Interfaz\NominaVentana$5.class
 Interfaz\AnticipoSalario.class
 Interfaz\IngresarComisiones$1.class
 Interfaz\HorasExtras$2.class
@@ -72,12 +74,14 @@ Interfaz\IngresarPrestamo$2.class
 Interfaz\PRESTACIONES$9.class
 com\mycompany\proyectonomina\PrestacionLaboral.class
 com\mycompany\proyectonomina\Usuario.class
+Interfaz\NominaVentana$6.class
 Interfaz\PRESTACIONES$6.class
 Interfaz\ComisionVentas$1.class
 Interfaz\TiendaSolidaria$1.class
 Interfaz\TiendaSolidaria$4.class
 com\mycompany\proyectonomina\Bonificacion.class
 com\mycompany\proyectonomina\Anticipo.class
+Interfaz\NominaVentana$3.class
 com\mycompany\proyectonomina\ProyectoNomina$1.class
 Interfaz\AnticipoSalario$2.class
 Interfaz\HorasExtras$5.class
@@ -106,6 +110,7 @@ Interfaz\SolicitudDeAusencia$4.class
 Interfaz\AutorizarAusencia.class
 com\mycompany\proyectonomina\Vacacion.class
 Interfaz\NominaVentana$1.class
+Interfaz\Dashboard$13.class
 Interfaz\ComisionProduccion$6.class
 Interfaz\EmpleadoIngreso$1.class
 Interfaz\EstadoDeCuentaPrestamo$1.class
@@ -122,6 +127,7 @@ Interfaz\IngresoDatosFamiliares$4.class
 Interfaz\SolicitudDeAusencia.class
 com\mycompany\proyectonomina\AnticipoService.class
 Interfaz\EmpleadoIngreso$7.class
+Interfaz\NominaVentana$2.class
 com\mycompany\proyectonomina\Familiar.class
 Interfaz\IngresoDatosFamiliares$3.class
 Interfaz\PRESTACIONES$8.class

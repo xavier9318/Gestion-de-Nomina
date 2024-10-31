@@ -29,8 +29,12 @@ public class NominaVentana extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtFecha = new javax.swing.JTextField();
+        btnGenerarMasivo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPlanilla = new javax.swing.JTable();
+        btbGuardarNomina = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,28 +43,88 @@ public class NominaVentana extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 36)); // NOI18N
         jLabel1.setText("Nomina");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 140, 34));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 140, 34));
 
         jLabel5.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        jLabel5.setText("Mes Generacion Nomina:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 190, 20));
+        jLabel5.setText("Fecha Generacion:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 150, 20));
 
-        jTextField1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-        jTextField1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 120, -1));
+        txtFecha.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        txtFecha.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 120, -1));
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        jButton1.setText("Generar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 120, -1));
+        btnGenerarMasivo.setBackground(new java.awt.Color(153, 153, 153));
+        btnGenerarMasivo.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnGenerarMasivo.setText("Generar");
+        btnGenerarMasivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGenerarMasivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarMasivoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGenerarMasivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 130, 30));
+
+        tblPlanilla.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        tblPlanilla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id. Empleado", "Nombre", "Apellido", "Salario", "Fecha Planilla", "Comision", "Descuento Permiso", "Horas Extras", "Descuento Prestamo", "Descuento Tienda", "Total a Recibir"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true, true, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblPlanilla);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 890, 170));
+
+        btbGuardarNomina.setBackground(new java.awt.Color(153, 153, 153));
+        btbGuardarNomina.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btbGuardarNomina.setText("Guardar");
+        btbGuardarNomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbGuardarNominaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btbGuardarNomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
+
+        btnRegresar.setBackground(new java.awt.Color(153, 153, 153));
+        btnRegresar.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 931, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,6 +135,24 @@ public class NominaVentana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        Dashboard ventanaprincipal = new Dashboard();
+        ventanaprincipal.setVisible(true); 
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
+
+    private void btnGenerarMasivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarMasivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGenerarMasivoActionPerformed
+
+    private void btbGuardarNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbGuardarNominaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btbGuardarNominaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,10 +190,14 @@ public class NominaVentana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btbGuardarNomina;
+    private javax.swing.JButton btnGenerarMasivo;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblPlanilla;
+    private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 }
